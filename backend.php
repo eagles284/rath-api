@@ -36,7 +36,6 @@ function dequeue($id){
 
 	$query = "DELETE FROM api WHERE id='$id'";
 	mysqli_query($conn, $query);
-	echo '200';
 }
 
 ?>

@@ -3,7 +3,9 @@ header("Content-Type:application/json");
 require "backend.php";
 
 
-if (!isset($_POST['api'])){
+if (isset($_POST['confirm'])){
+
+    $id = $_POST['confirm'];
     if (mysqli_num_rows($queue) > 0) {
         // output data of each row
 
@@ -16,6 +18,8 @@ if (!isset($_POST['api'])){
         $queues = $queues . ']';
         $queues = '{'.'"queues":'.$queues.'}';
         echo $queues;
+
+        dequeue($id);
     }
 }
 
@@ -68,12 +72,6 @@ if (isset($_POST['api'])){
             }
         }
     }
-
-}
-
-if (!empty($_POST['confirm'])){
-    $id = $_POST['confirm'];
-    dequeue($id);
 }
 
 

